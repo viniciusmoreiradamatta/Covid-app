@@ -1,0 +1,36 @@
+version: '3.4'
+
+services:
+  covidservice.api:
+    image: ${DOCKER_REGISTRY-}covidserviceapi
+    build:
+      context: .
+      dockerfile: Backend/src/CovidService.Api/Dockerfile
+    ports:
+    - 8080:80 
+    networks:
+    - covidapp
+
+  db:
+    image: "mcr.microsoft.com/mssql/server"
+    environment:
+      SA_PASSWORD: "DbP@ssw0rd"
+      ACCEPT_EULA: "Y"
+    ports:
+        - 1433:1433
+    networks:
+    - covidapp
+
+  app:
+    image: covid-app
+    build:
+      context: Frontend/covid-app/
+      dockerfile: ./Dockerfile
+    ports:
+        - 80:80
+    networks:
+    - covidapp
+
+networks:
+  covidapp:
+    driver: bridge
