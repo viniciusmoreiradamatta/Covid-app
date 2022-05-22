@@ -1,0 +1,369 @@
+<style>
+  :host {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    font-size: 14px;
+    color: #333;
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    margin: 8px 0;
+  }
+
+  p {
+    margin: 0;
+  }
+
+  .spacer {
+    flex: 1;
+  }
+
+  .toolbar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    background-color: #1976d2;
+    color: white;
+    font-weight: 600;
+  }
+
+  .toolbar img {
+    margin: 0 16px;
+  }
+
+  .toolbar #twitter-logo {
+    height: 40px;
+    margin: 0 8px;
+  }
+
+  .toolbar #youtube-logo {
+    height: 40px;
+    margin: 0 16px;
+  }
+
+  .toolbar #twitter-logo:hover,
+  .toolbar #youtube-logo:hover {
+    opacity: 0.8;
+  }
+
+  .content {
+    display: flex;
+    margin: 82px auto 32px;
+    padding: 0 16px;
+    max-width: 960px;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  svg.material-icons {
+    height: 24px;
+    width: auto;
+  }
+
+  svg.material-icons:not(:last-child) {
+    margin-right: 8px;
+  }
+
+  .card svg.material-icons path {
+    fill: #888;
+  }
+
+  .card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 16px;
+  }
+
+  .card {
+    all: unset;
+    border-radius: 4px;
+    border: 1px solid #eee;
+    background-color: #fafafa;
+    height: 40px;
+    width: 200px;
+    margin: 0 8px 16px;
+    padding: 16px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.2s ease-in-out;
+    line-height: 24px;
+  }
+
+  .card-container .card:not(:last-child) {
+    margin-right: 0;
+  }
+
+  .card.card-small {
+    height: 16px;
+    width: 168px;
+  }
+
+  .card-container .card:not(.highlight-card) {
+    cursor: pointer;
+  }
+
+  .card-container .card:not(.highlight-card):hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 17px rgba(0, 0, 0, 0.35);
+  }
+
+  .card-container .card:not(.highlight-card):hover .material-icons path {
+    fill: rgb(105, 103, 103);
+  }
+
+  .card.highlight-card {
+    background-color: #1976d2;
+    color: white;
+    font-weight: 600;
+    border: none;
+    width: auto;
+    min-width: 30%;
+    position: relative;
+  }
+
+  .card.card.highlight-card span {
+    margin-left: 60px;
+  }
+
+  svg#rocket {
+    width: 80px;
+    position: absolute;
+    left: -10px;
+    top: -24px;
+  }
+
+  svg#rocket-smoke {
+    height: calc(100vh - 95px);
+    position: absolute;
+    top: 10px;
+    right: 180px;
+    z-index: -10;
+  }
+
+  a,
+  a:visited,
+  a:hover {
+    color: #1976d2;
+    text-decoration: none;
+  }
+
+  a:hover {
+    color: #125699;
+  }
+
+  .terminal {
+    position: relative;
+    width: 80%;
+    max-width: 600px;
+    border-radius: 6px;
+    padding-top: 45px;
+    margin-top: 8px;
+    overflow: hidden;
+    background-color: rgb(15, 15, 16);
+  }
+
+  .terminal::before {
+    content: "\2022 \2022 \2022";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 4px;
+    background: rgb(58, 58, 58);
+    color: #c2c3c4;
+    width: 100%;
+    font-size: 2rem;
+    line-height: 0;
+    padding: 14px 0;
+    text-indent: 4px;
+  }
+
+  .terminal pre {
+    font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, monospace;
+    color: white;
+    padding: 0 1rem 1rem;
+    margin: 0;
+  }
+
+  .circle-link {
+    height: 40px;
+    width: 40px;
+    border-radius: 40px;
+    margin: 8px;
+    background-color: white;
+    border: 1px solid #eeeeee;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    transition: 1s ease-out;
+  }
+
+  .circle-link:hover {
+    transform: translateY(-0.25rem);
+    box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.2);
+  }
+
+  footer {
+    margin-top: 8px;
+    display: flex;
+    align-items: center;
+    line-height: 20px;
+  }
+
+  footer a {
+    display: flex;
+    align-items: center;
+  }
+
+  .github-star-badge {
+    color: #24292e;
+    display: flex;
+    align-items: center;
+    font-size: 12px;
+    padding: 3px 10px;
+    border: 1px solid rgba(27, 31, 35, .2);
+    border-radius: 3px;
+    background-image: linear-gradient(-180deg, #fafbfc, #eff3f6 90%);
+    margin-left: 4px;
+    font-weight: 600;
+  }
+
+  .github-star-badge:hover {
+    background-image: linear-gradient(-180deg, #f0f3f6, #e6ebf1 90%);
+    border-color: rgba(27, 31, 35, .35);
+    background-position: -.5em;
+  }
+
+  .github-star-badge .material-icons {
+    height: 16px;
+    width: 16px;
+    margin-right: 4px;
+  }
+
+  svg#clouds {
+    position: fixed;
+    bottom: -160px;
+    left: -230px;
+    z-index: -10;
+    width: 1920px;
+  }
+
+  /* Responsive Styles */
+  @media screen and (max-width: 767px) {
+
+    .card-container>*:not(.circle-link),
+    .terminal {
+      width: 100%;
+    }
+
+    .card:not(.highlight-card) {
+      height: 16px;
+      margin: 8px 0;
+    }
+
+    .card.highlight-card span {
+      margin-left: 72px;
+    }
+
+    svg#rocket-smoke {
+      right: 120px;
+      transform: rotate(-5deg);
+    }
+  }
+
+  @media screen and (max-width: 575px) {
+    svg#rocket-smoke {
+      display: none;
+      visibility: hidden;
+    }
+  }
+</style>
+
+<div class="toolbar" role="banner">
+  <svg width="72px" height="60px" fill="#fff" xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Layer_1" x="0px" y="0px" viewBox="0 0 300 300"
+    style="enable-background:new 0 0 300 300;" xml:space="preserve">
+    <style type="text/css">
+      .st0 {
+        fill: #1976d2;
+      }
+
+      .st1 {
+        fill: #FFFFFF;
+      }
+    </style>
+    <rect x="-0.2" y="-0.1" class="st0" width="300" height="299.7" />
+    <g>
+      <path class="st1"
+        d="M36.8,148c-2.8,0-5.5-1-7.7-3c-4.7-4.3-5-11.5-0.7-16.1c2.1-2.3,4.9-3.6,7.9-3.7c3.1-0.1,6,0.9,8.2,3   c1.4,1.3,2.5,3,3.1,4.8c0.5,1.5,0.7,3,0.6,4.5c0,0.5-0.5,1-1.1,0.9c-0.6,0-1-0.5-0.9-1.1c0.1-1.3-0.1-2.5-0.5-3.7   c-0.5-1.5-1.4-2.9-2.6-4c-1.9-1.7-4.3-2.6-6.8-2.5c-2.5,0.1-4.8,1.2-6.5,3.1c-3.5,3.8-3.2,9.8,0.6,13.3c3.8,3.5,9.8,3.2,13.3-0.6   c0.4-0.4,1-0.4,1.4-0.1c0.4,0.4,0.4,1,0.1,1.4C43,146.7,39.9,148,36.8,148z" />
+    </g>
+    <g>
+      <path class="st1"
+        d="M54.4,190.2c-3.6,0-7.1-1.7-9.3-4.8c-3.6-5.1-2.4-12.3,2.7-15.9c3-2.1,6.8-2.7,10.3-1.5   c0.5,0.2,0.8,0.7,0.6,1.3c-0.2,0.5-0.7,0.8-1.3,0.6c-2.9-1-6-0.5-8.5,1.2c-4.2,3-5.2,8.9-2.2,13.1c3,4.2,8.9,5.2,13.1,2.2   c2.1-1.5,3.4-3.6,3.8-6.1c0.4-2.5-0.1-5-1.6-7c-0.3-0.5-0.2-1.1,0.2-1.4c0.5-0.3,1.1-0.2,1.4,0.2c1.8,2.5,2.5,5.5,1.9,8.5   c-0.5,3-2.2,5.6-4.7,7.4C59,189.5,56.7,190.2,54.4,190.2z" />
+    </g>
+    <g>
+      <path class="st1"
+        d="M69,122.8c-0.1,0-0.3,0-0.4-0.1c-3.5-1.6-5.1-5.7-3.5-9.2c1.6-3.5,5.7-5.1,9.2-3.5c1.7,0.8,3,2.1,3.7,3.9   c0.7,1.7,0.6,3.6-0.1,5.4c-0.6,1.4-1.7,2.6-3.1,3.3c-0.5,0.3-1.1,0.1-1.4-0.4c-0.3-0.5-0.1-1.1,0.4-1.4c1-0.5,1.7-1.4,2.2-2.4   c0.5-1.2,0.6-2.6,0.1-3.8c-0.5-1.2-1.4-2.2-2.6-2.8c-2.5-1.1-5.5,0-6.6,2.5c-1.1,2.5,0,5.5,2.5,6.6c0.5,0.2,0.7,0.8,0.5,1.3   C69.8,122.6,69.4,122.8,69,122.8z" />
+    </g>
+    <g>
+      <path class="st1"
+        d="M88.4,152.6c-1.1,0-2.2-0.2-3.3-0.6c-1.9-0.7-3.4-2.1-4.5-3.8c-0.3-0.5-0.1-1.1,0.3-1.4   c0.5-0.3,1.1-0.1,1.4,0.3c0.8,1.3,2,2.4,3.5,3c3.6,1.4,7.8-0.4,9.2-4c1.4-3.6-0.4-7.8-4-9.2c-3.6-1.4-7.8,0.4-9.2,4   c-0.2,0.5-0.8,0.8-1.3,0.6c-0.5-0.2-0.8-0.8-0.6-1.3c1.8-4.7,7.1-7,11.8-5.1c4.7,1.8,7,7.1,5.1,11.8   C95.5,150.4,92.1,152.6,88.4,152.6z" />
+    </g>
+    <g>
+      <path class="st1"
+        d="M88.4,171.2c-1.2,0-2.4-0.4-3.4-1.2c-1.2-0.9-1.9-2.2-2-3.7c-0.1-1.2,0.1-2.4,0.8-3.5c0.3-0.5,0.9-0.6,1.4-0.3   c0.5,0.3,0.6,0.9,0.3,1.4c-0.4,0.7-0.6,1.4-0.5,2.2c0.1,0.9,0.6,1.8,1.3,2.3c0.7,0.6,1.6,0.8,2.6,0.7c0.9-0.1,1.8-0.6,2.3-1.3   c0.6-0.7,0.8-1.6,0.7-2.6c-0.1-0.9-0.6-1.8-1.3-2.3c-0.7-0.6-1.6-0.8-2.6-0.7c-0.5,0.1-1-0.3-1.1-0.9c-0.1-0.5,0.3-1,0.9-1.1   c1.5-0.2,2.9,0.2,4,1.2c1.2,0.9,1.9,2.2,2,3.7c0.3,3-1.8,5.7-4.8,6.1C88.8,171.2,88.6,171.2,88.4,171.2z" />
+    </g>
+    <g>
+      <path class="st1"
+        d="M67.6,164.8c-3.9,0-7.7-1.3-10.8-3.6c-3.8-2.9-6.3-7.1-7-11.9c-0.7-4.8,0.6-9.5,3.5-13.3   c2.9-3.8,7.1-6.3,11.9-7c4.8-0.7,9.5,0.6,13.3,3.5l-1.2,1.6c-3.4-2.6-7.6-3.7-11.9-3.1c-4.2,0.6-8,2.8-10.6,6.2   c-2.6,3.4-3.7,7.6-3.1,11.8c0.6,4.2,2.8,8,6.2,10.6c3.4,2.6,7.6,3.7,11.8,3.1c4.2-0.6,8-2.8,10.6-6.2c0.3-0.4,1-0.5,1.4-0.2   c0.4,0.3,0.5,1,0.2,1.4c-2.9,3.8-7.1,6.3-11.9,7C69.3,164.8,68.4,164.8,67.6,164.8z" />
+    </g>
+    <path class="st1"
+      d="M185.9,139.5c-0.1-0.1-0.1-0.1-0.2-0.1h-7c-0.1,0-0.2,0.1-0.2,0.2c-0.1,0.5-3.1,11.4-4,15.1  c-0.9-3.7-3.8-14.6-4-15.1c0-0.1-0.1-0.2-0.2-0.2h-7c-0.1,0-0.2,0-0.2,0.1c0,0.1,0,0.2,0,0.2l7.5,23c0,0.1,0.1,0.2,0.2,0.2h7.3  c0.1,0,0.2-0.1,0.2-0.2l7.5-23C185.9,139.6,185.9,139.6,185.9,139.5z" />
+    <path class="st1"
+      d="M190.7,139.4h6.2c0.1,0,0.2,0.1,0.2,0.2v23c0,0.1-0.1,0.2-0.2,0.2h-6.2c-0.1,0-0.2-0.1-0.2-0.2v-23  C190.5,139.5,190.6,139.4,190.7,139.4z" />
+    <path class="st1"
+      d="M222.4,142.3c-2-1.9-5-2.9-8.7-2.9h-8c-0.1,0-0.2,0.1-0.2,0.2v23c0,0.1,0.1,0.2,0.2,0.2h7.4  c3.9,0,6.9-1.1,9.1-3.2c2.2-2.1,3.2-5.2,3.2-9.1C225.5,147,224.5,144.2,222.4,142.3z M218.9,150.9c0,1.8-0.5,3.5-1.6,4.9  c-1,1.1-2.5,1.7-4,1.6h-1.4v-12.4h1.8c1.4-0.1,2.7,0.4,3.6,1.4C218.4,147.6,218.9,149.2,218.9,150.9z" />
+    <path class="st1"
+      d="M228.8,150h8.9c0.1,0,0.2,0.1,0.2,0.2v4.9c0,0.1-0.1,0.2-0.2,0.2h-8.9c-0.1,0-0.2-0.1-0.2-0.2v-4.9  C228.6,150.2,228.7,150,228.8,150z" />
+    <path class="st1"
+      d="M254.5,139.4h-5.6c-0.1,0-0.1,0-0.2,0.1l-7.9,6.4c-0.1,0.1-0.1,0.3,0,0.4l3.2,4c0.1,0.1,0.3,0.1,0.4,0  c0.3-0.2,2.6-2,3.6-2.9c-0.1,3-0.1,14.8-0.1,15.3c0,0.1,0,0.1,0.1,0.2c0,0,0.1,0.1,0.2,0.1h6.3c0.1,0,0.2-0.1,0.2-0.2v-23  C254.8,139.5,254.7,139.4,254.5,139.4C254.6,139.4,254.5,139.4,254.5,139.4z" />
+    <path class="st1"
+      d="M159.1,142.4c-1.9-2-4.8-3.1-8.5-3.1s-6.6,1-8.5,3.1s-2.9,5.1-2.9,9c0,3.9,1,7,3,9s4.8,3.1,8.5,3.1  s6.6-1.1,8.5-3.1s2.9-5.1,2.9-9S161.1,144.5,159.1,142.4z M156,151.4c0.1,1.5-0.4,3.1-1.4,4.3c-2.3,1.9-5.7,1.9-8,0  c-1-1.2-1.5-2.7-1.4-4.3c-0.1-1.5,0.4-3.1,1.4-4.2c2.3-1.9,5.7-1.9,8,0C155.6,148.3,156.1,149.9,156,151.4L156,151.4z" />
+    <path class="st1"
+      d="M274.3,142c-1.7-2-4.2-3-6.7-2.9c-4.3-0.4-8,2.8-8.4,7.1c0,0.4,0,0.9,0,1.3c-0.1,2,0.5,4.1,1.8,5.7  c1.2,1.4,3,2.2,4.9,2.1c1.4,0,2.8-0.1,4.1-0.4c-0.3,0.6-0.7,1.2-1.2,1.6c-1.5,1-3.2,1.4-5,1.3c-0.9,0-1.8-0.1-2.7-0.2  c-0.1,0-0.1,0-0.2,0.1c-0.1,0-0.1,0.1-0.1,0.2v4.9c0,0.1,0.1,0.2,0.2,0.2c1.1,0.1,2.2,0.2,3.2,0.2c4.3,0,7.5-1,9.5-3.1  c2-2.1,3-5.4,3-10C276.7,146.7,275.9,143.9,274.3,142z M267.8,150.6c-1.6,0-2.9-1.6-2.9-3.6c0-2,1.3-3.5,2.9-3.5s2.9,1.6,2.9,3.5  C270.7,149,269.4,150.6,267.8,150.6z" />
+    <path class="st1"
+      d="M136.3,154.3c0-0.1-0.1-0.1-0.2-0.1h-5.9c-0.1,0-0.2,0.1-0.2,0.2c-0.2,0.5-0.5,0.9-0.8,1.3  c-2.3,1.9-5.7,1.9-8,0c-1-1.2-1.5-2.7-1.4-4.3c-0.1-1.5,0.4-3.1,1.4-4.2c2.3-1.9,5.7-1.9,8,0c0.3,0.3,0.5,0.6,0.6,0.9  c0,0.1,0.1,0.1,0.2,0.1h6c0.1,0,0.1,0,0.2-0.1c0.1-0.1,0.1-0.1,0.1-0.2c-0.3-2-1.2-4-2.6-5.5c-1.9-2-4.8-3.1-8.5-3.1  c-3.7,0-6.6,1-8.5,3.1s-3,5.1-3,9c0,3.9,1,7,3,9s4.8,3.1,8.5,3.1s6.6-1.1,8.5-3.1c1.5-1.6,2.4-3.7,2.7-5.9  C136.4,154.5,136.4,154.4,136.3,154.3z" />
+  </svg>
+  <span> Dados sobre a covid</span>
+  <div class="spacer"></div>
+  <a aria-label="Linkedin" target="_blank" rel="noopener"
+    href="https://www.linkedin.com/in/vinicius-moreira-da-mata-89245711b" title="Linkedin">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="24px" height="24px">
+      <path fill="#fff"
+        d="M8.421 14h.052 0C11.263 14 13 12 13 9.5 12.948 6.945 11.263 5 8.526 5 5.789 5 4 6.945 4 9.5 4 12 5.736 14 8.421 14zM4 17H13V43H4zM44 26.5c0-5.247-4.253-9.5-9.5-9.5-3.053 0-5.762 1.446-7.5 3.684V17h-9v26h9V28h0c0-2.209 1.791-4 4-4s4 1.791 4 4v15h9C44 43 44 27.955 44 26.5z" />
+    </svg>
+  </a>
+  <a aria-label="Repositorio deste projeto" target="_blank" rel="noopener" href="https://github.com/viniciusmoreiradamatta/Covid-app"
+    title="Github">
+    <svg fill="#fff" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32px" height="32px"
+      fill-rule="evenodd">
+      <path fill-rule="evenodd"
+        d="M 16 4 C 9.371094 4 4 9.371094 4 16 C 4 21.300781 7.4375 25.800781 12.207031 27.386719 C 12.808594 27.496094 13.027344 27.128906 13.027344 26.808594 C 13.027344 26.523438 13.015625 25.769531 13.011719 24.769531 C 9.671875 25.492188 8.96875 23.160156 8.96875 23.160156 C 8.421875 21.773438 7.636719 21.402344 7.636719 21.402344 C 6.546875 20.660156 7.71875 20.675781 7.71875 20.675781 C 8.921875 20.761719 9.554688 21.910156 9.554688 21.910156 C 10.625 23.746094 12.363281 23.214844 13.046875 22.910156 C 13.15625 22.132813 13.46875 21.605469 13.808594 21.304688 C 11.144531 21.003906 8.34375 19.972656 8.34375 15.375 C 8.34375 14.0625 8.8125 12.992188 9.578125 12.152344 C 9.457031 11.851563 9.042969 10.628906 9.695313 8.976563 C 9.695313 8.976563 10.703125 8.65625 12.996094 10.207031 C 13.953125 9.941406 14.980469 9.808594 16 9.804688 C 17.019531 9.808594 18.046875 9.941406 19.003906 10.207031 C 21.296875 8.65625 22.300781 8.976563 22.300781 8.976563 C 22.957031 10.628906 22.546875 11.851563 22.421875 12.152344 C 23.191406 12.992188 23.652344 14.0625 23.652344 15.375 C 23.652344 19.984375 20.847656 20.996094 18.175781 21.296875 C 18.605469 21.664063 18.988281 22.398438 18.988281 23.515625 C 18.988281 25.121094 18.976563 26.414063 18.976563 26.808594 C 18.976563 27.128906 19.191406 27.503906 19.800781 27.386719 C 24.566406 25.796875 28 21.300781 28 16 C 28 9.371094 22.628906 4 16 4 Z" />
+    </svg> </a>
+</div>
+<router-outlet></router-outlet>
